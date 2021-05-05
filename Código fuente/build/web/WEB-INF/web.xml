@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ControladorGeneral</servlet-name>
+        <servlet-class>controlador.ControladorGeneral</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorAjax</servlet-name>
+        <servlet-class>controlador.ControladorAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorPDF</servlet-name>
+        <servlet-class>controlador.ControladorPDF</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorImagenes</servlet-name>
+        <servlet-class>controlador.ControladorImagenes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControladorGeneral</servlet-name>
+        <url-pattern>/ControladorGeneral</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorAjax</servlet-name>
+        <url-pattern>/ControladorAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorPDF</servlet-name>
+        <url-pattern>/ControladorPDF</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorImagenes</servlet-name>
+        <url-pattern>/ControladorImagenes</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

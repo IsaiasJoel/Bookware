@@ -1,0 +1,267 @@
+<%@page import="controlador.ControladorImagenes"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="modeloDAO.ClienteDAO"%>
+<%@page import="modelo.Empresa"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>BookWare</title>
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+        <link rel="stylesheet" href="assets/css/index.css">
+        <link href="assets/css/compra.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/tablas.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/ventas.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/png" href="images/favicon.ico">
+        <title>Administración de empresas - bookware</title>
+    </head>
+    <body id="page-top">
+        <%
+            HttpSession sesion = request.getSession();
+            Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+            
+            ControladorImagenes controlador = new ControladorImagenes();
+            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+        %>
+        <div id="wrapper">
+            <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.jsp">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+
+                        <div class="sidebar-brand-text mx-3">
+                            <span class="bookware">BOOKWARE</span>
+                        </div>
+                    </a>
+
+                    <hr class="sidebar-divider my-0">
+
+                    <div class="d-flex justify-content-center flex-column cont-logo">
+                        <div class="d-flex align-items-center logo">
+                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        </div>
+
+                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
+                    </div>
+
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
+                        <!--INICIO-->
+                        <li class="nav-item" role="presentation" id="btn_inicio">
+                            <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+
+                        <!--CONSULTAS-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 12px;">
+                                <i class="fas fa-book"></i>
+                                <span>Consultas</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
+                                <!--clientes-->
+                                <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
+                                    <i class="far fa-user"></i> Clientes
+                                </a>
+                                <!--inventario-->
+                                <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
+                                    <i class="fas fa-book-reader"></i> Inventario
+                                </a>
+                                <!--proveedores-->
+                                <a class="dropdown-item" href="proveedores.jsp">
+                                    <i class="fas fa-luggage-cart"></i> Proveedores
+                                </a>
+                            </div>
+                        </li>
+
+                        <!--COMPRAS -->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
+                                <i class="fas fa-truck"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+
+                        <!--VENTAS-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+
+                        <!--REPORTES-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 12px;">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Reportes</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
+                                <!--Reporte compras-->
+                                <a class="dropdown-item" href="reportesCompra.jsp">
+                                    Reporte compras
+                                </a>
+                                <!--Resportes ventas-->
+                                <a class="dropdown-item" href="reportesVenta.jsp">
+                                    Reporte ventas
+                                </a>
+                            </div>
+                        </li>
+
+                        <!--CERRAR SESION-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
+                                <i class="fas fa-reply"></i>
+                                <span>Cerrar Sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                        <div class="container-fluid">
+                            <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="nav navbar-nav flex-nowrap ml-auto">
+
+                                <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
+                                    </div>
+                                </li>
+
+                                <div class="d-none d-sm-block topbar-divider"></div>
+
+                                <li class="nav-item dropdown no-arrow" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario() %></span>
+                                            <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo() %>"></a>
+                                        <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            <%
+                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                            %>
+                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
+                                                &nbsp;Configuración
+                                            </a>
+
+                                            <%}%>
+                                            
+                                            <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!--contenido principal-->
+                    <div class="container-fluid">
+                        <!--contenido contenido-->
+                        <div class="row">
+                            <div class="col-12">
+                                <!--pegar acá-->
+                                <br>
+                                <h3 class="title-inventario text-center">Administración</h3>
+                                <h5 class="">&nbsp; solo personal autorizado</h5>
+                                <hr>
+
+                                <form action="ControladorImagenes" method="POST" name="formEmpresa" enctype="multipart/form-data" id="formEmpresa">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>RUC</label>
+                                                    <input type="text" class="form-control" name="rucEmpresa">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>Usuario</label>
+                                                    <input type="text" class="form-control" name="usuarioEmpresa">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" name="passwordEmpresa">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label>Logo</label>
+                                                    <input type="file" class="form-control" name="logoEmpresa">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col">
+                                                <div class="form-group mt-4">
+                                                    <button type="submit" class="btn btn-success form-control">
+                                                        Registrar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">RUC</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Logo</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <%= controlador.imprimirTablaEmpresas()%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<script src="assets/js/jquery.min.js"></script>-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+        <script src="assets/js/theme.js"></script>
+        <script src="js/principal.js" type="text/javascript"></script>
+        <script src="js/scripts.js" type="text/javascript"></script>
+    </body>
+</html>

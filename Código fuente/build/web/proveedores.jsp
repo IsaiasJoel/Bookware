@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<%@page import="modelo.Empresa"%>
+<%@page import="modeloDAO.ProveedorDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.Proveedor"%>
+<%@page import="modelo.Proveedor"%>
+<%@page session="true"%>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>BookWare</title>
+        <link rel="icon" type="image/png" href="images/favicon.ico">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+        <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+        <link rel="stylesheet" href="assets/css/index.css">
+        <link href="assets/css/compra.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/tablas.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/ventas.css" rel="stylesheet" type="text/css"/>
+        
+    </head>
+
+    <body id="page-top">
+        <%
+            ProveedorDAO daoProveedor = new ProveedorDAO();
+            
+            HttpSession sesion = request.getSession();
+            Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+        %>
+        <div id="wrapper">
+            <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.jsp">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        
+                        <div class="sidebar-brand-text mx-3">
+                            <span class="bookware">BOOKWARE</span>
+                        </div>
+                    </a>
+                    
+                    <hr class="sidebar-divider my-0">
+                    
+                    <div class="d-flex justify-content-center flex-column cont-logo">
+                        <div class="d-flex align-items-center logo">
+                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        </div>
+                        
+                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
+                    </div>
+
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
+                        <!--INICIO-->
+                        <li class="nav-item" role="presentation" id="btn_inicio">
+                            <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
+                                <i class="fas fa-home"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+
+                        <!--CONSULTAS-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 12px;">
+                                <i class="fas fa-book"></i>
+                                <span>Consultas</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
+                                <!--clientes-->
+                                <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
+                                    <i class="far fa-user"></i> Clientes
+                                </a>
+                                <!--inventario-->
+                                <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
+                                    <i class="fas fa-book-reader"></i> Inventario
+                                </a>
+                                <!--proveedores-->
+                                <a class="dropdown-item" href="proveedores.jsp">
+                                    <i class="fas fa-luggage-cart"></i> Proveedores
+                                </a>
+                            </div>
+                        </li>
+
+                        <!--COMPRAS -->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
+                                <i class="fas fa-truck"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+
+                        <!--VENTAS-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+
+                        <!--REPORTES-->
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-bottom: 12px;">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Reportes</span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
+                                <!--Reporte compras-->
+                                <a class="dropdown-item" href="reportesCompra.jsp">
+                                    Reporte compras
+                                </a>
+                                <!--Resportes ventas-->
+                                <a class="dropdown-item" href="reportesVenta.jsp">
+                                    Reporte ventas
+                                </a>
+                            </div>
+                        </li>
+
+                        <!--CERRAR SESION-->
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
+                                <i class="fas fa-reply"></i>
+                                <span>Cerrar Sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                        <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                            <ul class="nav navbar-nav flex-nowrap ml-auto">
+                                
+                                <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"></a>
+                                    </div>
+                                </li>
+                                
+                                <div class="d-none d-sm-block topbar-divider"></div>
+                                
+                                <li class="nav-item dropdown no-arrow" role="presentation">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                            <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
+                                        </a>
+                                        <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            <%
+                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                            %>
+                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
+                                                &nbsp;Configuración
+                                            </a>
+
+                                            <%}%>
+                                            
+                                            <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    
+                    
+                    <!--contenido principal-->
+                    <div class="container-fluid">
+                        <!--contenido contenido-->
+                        <br>
+                        <h3 class="title-inventario text-center">Proveedores</h3>
+                        <hr>
+
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAgregarProveedor">
+                            Agregar
+                        </button>
+
+                        <!-- Modal agregar proveedor -->
+                        <div class="modal fade" id="modalAgregarProveedor" tabindex="-1" aria-labelledby="modalAgregarProveedor" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Resgistrar Proveedor</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="ControladorGeneral" method="GET">
+                                            <div class="form-group">
+                                                <label for="nombreProveedor">Nombre: </label>
+                                                <input type="text" class="form-control" name="nombreProveedor" id="nombreProveedor">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-outline-success" name="accion" value="RegistrarProveedor">Registrar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%
+                                    List<Proveedor> lstProveedores = daoProveedor.listar(empresaLogeo);
+                                    for (Proveedor oProveedor : lstProveedores) {
+                                %>
+                                <tr>
+                                    <th scope="row" class="text-dark"><%= oProveedor.getNombres()%></th>
+
+                                    <td>
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#modalEditarProveedor" onclick="cargarDatosEditarProveedor(['<%= oProveedor.getId_proveedor()%>','<%= oProveedor.getNombres()%>'])">
+                                            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                        </button>
+
+                                        <!-- Modal editar-->
+                                        <div class="modal fade" id="modalEditarProveedor" tabindex="-1" aria-labelledby="modalEditarProveedor" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <form action="ControladorGeneral" method="GET">
+                                                            <div class="form-group">
+                                                                <input type="number" hidden="" name="uIdProveedor" id="uIdProveedor">
+
+                                                                <label for="uNombreProveedor">Nombre: </label>
+                                                                <input type="text" class="form-control" name="uNombreProveedor" id="uNombreProveedor">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-outline-success" name="accion" value="EditarProveedor">Actualizar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#modalEliminarProveedor" onclick="cargarIdEliminarProveedor(<%= oProveedor.getId_proveedor()%>)">
+                                            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg> 
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modalEliminarProveedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="ControladorGeneral" method="GET">
+                                                            <div class="form-group">
+                                                                <input type="number" name="dIdProveedor" id="dIdProveedor" hidden="">
+
+                                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-outline-danger" name="accion" value="EliminarProveedor">Eliminar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<script src="assets/js/jquery.min.js"></script>-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+        <script src="assets/js/theme.js"></script>
+        <script src="js/principal.js" type="text/javascript"></script>
+        <script src="js/scripts.js" type="text/javascript"></script>
+    </body>
+
+</html>

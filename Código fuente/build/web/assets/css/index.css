@@ -1,0 +1,109 @@
+.d-sm-flex.justify-content-between.align-items-center.mb-4 {
+ border-bottom: 1px solid #dfdfdf;
+}
+/*ESTILOS DE MENU VERTICAL*/
+.nav_vertical{
+background: #141B29;
+position: relative;
+}
+
+.ul_menus{
+	position: absolute;
+	display: inline-block;
+	top: 100px;
+}
+
+.dropdown-item{
+	font-size: 18px;
+}
+span{
+	font-size: 17px;
+}
+.bookware{
+	font-size: 22px!important;
+}
+.logo{
+	width:150px;
+	height:150px;
+	background: #bbbbbb;
+	border-radius: 50%;
+	margin-top: 20px;
+}
+.empresa{
+	font-size: 25px;
+	color: #fff;
+	text-align: center;
+}
+.empresa{
+	font-size: 25px;
+	color: #fff;
+	text-align: center;
+}
+.ruc{
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+}
+.cont-logo{
+	margin-left: -15%;
+}
+img{
+	border-radius: 50%;
+}
+@media screen and (max-width: 768px){
+			span{
+				font-size: 14px;
+			}
+			.logo{
+				width: 0px;
+				height: 0px;
+			}
+			.empresa{
+				display: none;
+			}
+			.ruc{
+				display: none;
+			}
+			img{
+				width: 0px;
+				height: 0px;
+			}
+}
+@media screen and (max-height: 640px){
+			a{
+				margin-bottom: 6px!important;
+				padding-bottom:5px!important;
+				padding-top:12px!important;
+			}
+			span{
+				font-size: 17px!important;
+			}
+			.logo{
+				width: 110px;
+				height: 110px;
+				margin-top: 10px;
+			}
+			ul{
+				margin-top: 0px!important;
+			}
+			.empresa{
+				font-size: 20px;
+				margin-bottom: 2px;
+			}
+			.ruc{
+				font-size: 18px;
+			}
+			.dropdown-item{
+				padding-top: 1px!important;
+				padding-bottom:1px!important;
+				font-size: 14px!important;
+				padding-left: 20px!important;
+				padding-right: 0px!important;
+				display: inline-block;
+			}
+			.dropdown-menu{
+				width: 10px!important;
+				padding-top: 2px!important;
+				padding-bottom: 2px!important;
+			}
+}

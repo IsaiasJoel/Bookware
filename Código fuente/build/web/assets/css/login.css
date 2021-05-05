@@ -1,0 +1,116 @@
+body{
+	font-family: "Lato", sans-serif;
+
+/* Ubicación de la imagen */
+    background-image: url('/images/fondo login.png');
+
+/* Para dejar la imagen de fondo centrada, vertical y horizontalmente */
+    background-position: center center;
+
+/* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+
+/* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+
+/* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+
+/* Se muestra un color de fondo mientras se está cargando la imagen
+de fondo o si hay problemas para cargarla */
+    background-color: #273041;
+}
+
+.container{
+    position: absolute;
+    top: 50%; /* Buscamos el centro horizontal (relativo) del navegador */
+    left: 50%; /* Buscamos el centro vertical (relativo) del navegador */
+    width: 60%; /* Definimos el ancho del objeto a centrar */
+    height: 60%; /* Definimos el alto del objeto a centrar */
+    margin-top: -15%; /*Restamos la mitad de la altura del objeto con un margin-top */
+    margin-left: -30%; /*Restamos la mitad de la anchura del objeto con un margin-left */
+}
+
+.izquierda{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background:rgba(255, 255, 255, 0.1);
+    padding: 15px;
+}
+
+.izquierda div{
+	display: flex;
+	justify-content: center;
+}
+
+.bookware{
+    color: #fff;
+    display: block;
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 25%;
+}
+
+.derecha{
+    background:#fff;
+    padding: 25px;
+}
+
+.title-bookware{
+	color: #576787;
+}
+
+.credenciales{
+    color: #878888;
+    font-size: 20px;
+    margin-top: 4%;
+}
+
+
+/*formulario*/
+form{
+	box-sizing: border-box;
+	/*border:1px solid #000;*/
+	height: 80%;
+	margin-top: 7%;
+}
+
+.footer-form{
+	/*background: yellow;*/
+	display: flex;
+	flex-direction: column;
+}
+
+.olvidaste_contrasena{
+	margin-top: 5%;
+    color: #878888;
+    font-size: 18px; 
+}
+
+.olvidaste_contrasena:hover{
+    color: #576787;
+    cursor:pointer;
+}
+
+.btnSubmit{
+	font-size: 20px;
+	color: #576787;
+	background: none;
+	border: 1px solid #576787;
+}
+
+.btnSubmit:hover{
+	background: #576787;
+	color: #fff; 
+}
+
+.btnCloseModal{
+	background: #576787;
+	color: #fff;
+}
+
+.btnCloseModal:hover{
+	background: #576787;
+	color: #fff;
+}

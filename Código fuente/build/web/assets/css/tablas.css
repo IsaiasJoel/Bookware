@@ -1,0 +1,19 @@
+/*TABLA DE LAS COMPRAS*/
+thead{
+	background: #FCA311;
+}
+th{
+	color: #fff;
+}
+tr{
+	text-align: center;
+}
+.botones-acciones{
+	border: none;
+}
+.fa-edit{
+	color: #3f61c2;
+}
+.fa-trash{
+	color: #c13737;
+}

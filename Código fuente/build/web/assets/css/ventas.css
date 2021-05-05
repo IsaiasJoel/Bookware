@@ -1,0 +1,387 @@
+label{
+	color:#4f5050;/*Cambiar color de los label*/
+	font-size: 20px;/*Tamaño de la letra*/
+	display: inline;/*Para ocupar solo su ancho*/
+	font-weight: bold;
+}
+/*INPUT PROVEEDOR*/
+.cliente,.cantidad,.libro,.precio2,.dinero{
+	outline: none;/*Que no me sombree al hacer click*/
+	border:none;/*Quitar el borde*/
+    border-bottom:1px solid #a4a4a4;/*Poner borde solo abajo*/
+    background: #f8f9fc;
+    font-size: 18px;
+}
+/*INPUTS DE VENTANA EMERGENTE*/
+.titulo,.autor,.editorial,.precio,.dinero{
+	outline: none;/*Lo mismo de lo anterior*/
+	border:none;
+    border-bottom:1px solid #a4a4a4;
+}
+/*INPUTS DE LA VENTANA EMERGENTE AL PRESIONAR*/
+.cliente:focus,.cantidad:focus,.precio:focus,.libro:focus,.titulo:focus,.autor:focus,.editorial:focus,.precio:focus{
+	border-bottom: 2px solid #717a8c;/*Resaltar borde inferior*/
+}
+/*INPUT CLIENTE*/
+.cliente{
+	width: 55%;/*Para tener un ancho del 80% de la pantalla*/
+}
+/*INPUT LIBRO*/
+.libro{
+	width: 42%;/*Para que el input del nombre del libro me ocupe el 50% de la pantalla*/
+	display: inline;
+}
+.label_libro{
+	margin-left: 40px;
+}
+.fecha{
+	margin-left: 10px;
+	font-weight: normal;
+	font-size: 18px;
+}
+/*INPUT TIPO DE DOCUMENTO*/
+.documento{
+	width: 13%;/*Para que el input del nombre del libro me ocupe el 50% de la pantalla*/
+	display: inline;
+	margin-left: 20px;
+	height: 35px;
+	border:1px solid #9ea3c1;
+	border-radius: 5px;
+	color:#4f5050;
+}
+.label_documento{
+	margin-left: 40px;
+}
+/*ANCHO Y MARGEN DE INPUTS*/
+.cantidad,.precio2{
+	width: 65px;
+	margin-left:10px;
+}
+/*LABEL DE PRECIO*/
+.label2{
+	margin-left: 32px;
+}
+.total{
+	margin-bottom: 40px;
+}
+.label_total{
+	margin-right: 7%;
+	color: 22px;
+	font-weight: bold;
+	margin-bottom: 40px;
+}
+.label_dinero{
+	margin-right: 4%;
+	color: 22px;
+	font-weight: bold;
+	margin-bottom: 40px;
+}
+.dinero{
+	width: 5%;
+	margin-bottom: 40px;
+}
+/*PARA MARGENES A TODO EL FORMULARIO*/
+.formulario{
+	margin-left: 15%;
+}
+.table-responsive{
+	margin-right: 5%;
+}
+.media{
+	display:inline;
+}
+.cont-btn{
+	/*display: inline;*/
+	margin-top: 70px;
+	margin-bottom: 10px;
+	margin-right: 0%;
+}
+.anadir{
+	width: 30%;
+	display: inline;
+	margin-right: -300px;
+}
+.cancelar{
+	display: inline-block;
+	/*margin-left: 88%;*/
+}
+.btn-agregar{
+	border-radius: 40%;
+	margin-left: 60px;
+}
+.contenedor-btn-agregar{
+	display: inline;
+}
+/*VENTANA EMERGENTE*/
+.titulo,.editorial,.autor{
+	width: 100%;
+}
+/*ANCHO DE CATEGORIA Y SUBCATEGORIA*/
+.categoria,.subcategoria{
+	width: 140%;
+}
+.subcat{
+	margin-right:10%;
+}
+/*BOTON REALIZAR COMPRA*/
+.venta{
+	width: 11%;
+}
+.cont-botones{
+	 border-top: 1px solid #dfdfdf;
+	 padding-top: 20px; 
+}
+.empresa{
+	font-weight: normal;
+}
+.ruc{
+	font-weight: normal;
+}
+/*MEDIAQUERIES*/
+@media screen and (max-width: 900px){
+			.proveedor,.libro{
+				width: 100%;
+			}
+			.media{
+				display: block;
+			}	
+
+			label{
+				display: block;
+			}
+			.libro{
+				margin-left: 0;
+			}
+			.label2{
+				margin-left: 0;
+				margin-top: 30px;
+			}
+			.form{
+				margin-left: 5%;
+			}
+			
+		}
+@media screen and (max-width: 1200px){
+			.proveedor,.libro{
+				width: 80%;
+			}
+		}
+@media screen and (max-width: 1306px){
+			.proveedor,.libro{
+				width: 80%;
+			}
+			label{
+				display: block;
+			}
+			.libro{
+				margin-left: 0;
+			}
+			.label2{
+				margin-left: 0;
+				margin-top: 30px;
+			}
+		}
+@media screen and (max-width: 1745px){
+			/*.anadir{
+				margin-left: 80%;
+				width: 15%;
+			}*/
+			/*.venta{
+				width: 15%;
+			}*/
+}
+@media screen and (max-width: 1460px){
+			/*.anadir{
+				margin-left: 80%;
+				width: 18%;
+			}*/
+			.venta{
+				width: 18%;
+			}
+}
+@media screen and (max-width: 1470px){
+			.cliente{
+				margin-right: 100px;
+				margin-bottom: 40px;
+				width: 80%;
+			}
+			.label_documento{
+				margin-left: 0px;
+			}
+			.documento{
+				width: 20%;
+			}
+			.libro{
+				width: 55%;
+			}
+}
+@media screen and (max-width: 1307px){
+			.cliente{
+				width: 75%;
+			}
+			.label_cliente{
+				display: inline;
+			}
+			.label_documento{
+				display: inline;
+			}
+			.cont-cliente{
+				display: block;
+			}
+			.label_fecha{
+				display: inline;
+				margin-bottom: 40px;
+			}
+			.fecha{
+				display: inline;
+				margin-bottom:40px;
+			}
+			.label_libro{
+				display: inline;
+				margin-top: 40px;
+				margin-left: 0px;
+			}
+			.contenedor_fecha{
+				display: block;
+				margin-bottom: 10px;
+			}
+			.label{
+				display: inline;
+			}
+			.cantidad{
+				display: inline;
+				margin-right:60px;
+			}
+			.label2{
+				display: inline;
+			}
+			.precio2{
+				display: inline;
+			}
+}
+@media screen and (max-width: 1260px){
+			/*.anadir{
+				margin-left: 80%;
+				width: 22%;
+			}*/
+			.venta{
+				width: 22%;
+			}
+}
+@media screen and (max-width: 1075px){
+			.venta{
+				width: 25%;
+			}
+}
+@media screen and (max-width: 980px){
+			.venta{
+				width: 30%;
+			}
+}
+@media screen and (max-width: 904px){
+			.media{
+				margin-bottom: 30px;
+				margin-top: -15px;
+			}			
+}
+@media screen and (max-width: 865px){
+			.venta{
+				width: 40%;
+			}
+}
+@media screen and (max-width: 760px){
+			.label_documento{
+				display: block;
+			}
+			.documento{
+				width: 40%;
+				margin-left: 0px;
+				height: 22px;
+				font-size: 14px;
+			}
+			.label_libro{
+				display: block;
+				margin-bottom: 0px !important;
+				margin-top: 20px;
+			}
+			.libro{
+				margin-top: 0px;
+				margin-bottom: 20px;
+			}
+			.btn-agregar{
+				margin-top: 2px!important;
+				margin-bottom: 2px!important;
+				padding-top: 3px;
+				padding-bottom: 3px;
+				padding-left: 8px;
+				padding-right: 8px;
+			}
+			.contenedor-btn-agregar{
+				width: 10px;
+				height: 10px;
+			}
+			label, input{
+				font-size: 15px;
+			}
+			.fecha{
+				font-size: 15px;
+				margin-bottom: 20px;
+			}
+
+}
+@media screen and (max-width: 595px){
+			.venta{
+				width: 50%;
+			}
+}
+@media screen and (max-width: 505px){
+			.formulario{
+				margin-left: 2px;
+			}
+			.venta{
+				width: 60%;
+			}
+}
+@media screen and (max-width: 475px){
+			.text-dark{
+				font-size: 22px;
+			}
+			label{
+				font-size: 13px;
+			}
+			.cliente{
+				width: 100%;
+				margin-right: 2px;
+			}
+			.container-fluid{
+				padding-right: 10px;
+				padding-left: 10px;
+			}
+			.cont-cliente{
+				display: inline;
+			}
+			.libro{
+				width: 80%;
+			}
+
+}
+@media screen and (max-width: 450px){
+			.venta{
+				width: 100%;
+			}
+}
+@media screen and (max-width: 400px){
+			.cont-cliente{
+				display: inline;
+			}
+			.libro{
+				width: 80%;
+			}
+			.fa-search{
+				font-size: 12px;
+				padding: 0px;
+			}
+			.btn-agregar{
+				margin-left: 0px!important;
+			}
+}
