@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<%@page import="modelo.DetalleVenta"%>
+<!-- <%@page import="modelo.DetalleVenta"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modeloDAO.LibroDAO"%>
 <%@page import="modeloDAO.ClienteDAO"%>
 <%@page import="modelo.Empresa"%>
-<%@page session="true"%>
+<%@page session="true"%> -->
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -22,11 +22,11 @@
 </head>
 
 <body id="page-top">
-    <%
+    <!-- <%
         HttpSession sesionActual = request.getSession();
         Empresa empresaLogeo = (Empresa) sesionActual.getAttribute("empresa");
         ArrayList<DetalleVenta> lstDetallesVenta = (ArrayList<DetalleVenta>) sesionActual.getAttribute("lstDetallesVenta");
-        String mensajeConfirmacionVenta = (String) sesionActual.getAttribute("mensajeConfirmaciónVenta");
+        String mensajeConfirmacionVenta = (String) sesionActual.getAttribute("mensajeConfirmaciï¿½nVenta");
         
         if (lstDetallesVenta == null) {
             lstDetallesVenta = new ArrayList<>();
@@ -43,7 +43,7 @@
             mensajeConfirmacionVenta = "";
         }
         if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-    %>
+    %> -->
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
@@ -60,7 +60,7 @@
                 <hr class="sidebar-divider my-0">
                 <div class="d-flex justify-content-center flex-column cont-logo">
                     <div class="d-flex align-items-center logo">
-                        <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        <img src="" width="150" height="150">
                     </div>
                     
                     <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
@@ -71,7 +71,7 @@
                 <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
                     <!--INICIO-->
                     <li class="nav-item" role="presentation" id="btn_inicio">
-                        <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
+                        <a class="nav-link active" href="index.html" style="margin-bottom: 12px;">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -86,15 +86,15 @@
 
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--clientes-->
-                            <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
+                            <a class="dropdown-item" href="clientes.html" id="btn_Cliente">
                                 <i class="far fa-user"></i> Clientes
                             </a>
                             <!--inventario-->
-                            <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
+                            <a class="dropdown-item" href="inventario.html" id="btn_inventario">
                                 <i class="fas fa-book-reader"></i> Inventario
                             </a>
                             <!--proveedores-->
-                            <a class="dropdown-item" href="proveedores.jsp">
+                            <a class="dropdown-item" href="proveedores.html">
                                 <i class="fas fa-luggage-cart"></i> Proveedores
                             </a>
                         </div>
@@ -102,7 +102,7 @@
 
                     <!--COMPRAS -->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
+                        <a class="nav-link" href="compras.html" style="margin-bottom: 12px;" id="btn_compra">
                             <i class="fas fa-truck"></i>
                             <span>Compras</span>
                         </a>
@@ -110,7 +110,7 @@
 
                     <!--VENTAS-->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
+                        <a class="nav-link" href="ventas.html" style="margin-bottom: 12px;" id="btn_ventas">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Ventas</span>
                         </a>
@@ -125,11 +125,11 @@
 
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--Reporte compras-->
-                            <a class="dropdown-item" href="reportesCompra.jsp">
+                            <a class="dropdown-item" href="reportesCompra.html">
                                 Reporte compras
                             </a>
                             <!--Resportes ventas-->
-                            <a class="dropdown-item" href="reportesVenta.jsp">
+                            <a class="dropdown-item" href="reportesVenta.html">
                                 Reporte ventas
                             </a>
                         </div>
@@ -138,7 +138,7 @@
                     <!--CERRAR SESION-->
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
-                            <span>Cerrar Sesión</span>
+                            <span>Cerrar Sesiï¿½n</span>
                         </a>
                     </li>
                 </ul>
@@ -264,7 +264,7 @@
                                             </div>
                                             <div class="font-weight-bold">
                                                 <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                                <p class="small text-gray-500 mb-0">Chicken the Dog ï¿½ 2w</p>
                                             </div>
                                         </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
                                 </div>
@@ -281,18 +281,18 @@
                                         
                                         <div class="dropdown-divider"></div>
                                         
-                                        <%
+                                        <!-- <%
                                             if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
                                         %>
-                                        <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                            &nbsp;Configuración
+                                        <a class="dropdown-item" role="presentation" href="administracion.html">
+                                            &nbsp;Configuraciï¿½n
                                         </a>
 
-                                        <%}%>
+                                        <%}%> -->
                                         
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;
-                                            Cerrar sesión
+                                            Cerrar sesiï¿½n
                                         </a>
                                     </div>
                                 </div>
@@ -302,18 +302,18 @@
                 </nav>
                 
                 <div class="container-fluid">
-                    <%
+                    <!-- <%
                         if(mensajeConfirmacionVenta.equalsIgnoreCase("ok")){
                             mensajeConfirmacionVenta = "";
                     %>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Hecho!</strong> La venta se ha realizado con éxito.
+                        <strong>Hecho!</strong> La venta se ha realizado con ï¿½xito.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     
-                    <%}%>
+                    <%}%> -->
                     
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0">Nueva Venta</h3>
@@ -375,10 +375,10 @@
                                             <!--Div para agrupar los select-->
                                             <div class="d-flex justify-content-between mt-4">
                                                 <div class="form-group categ">
-                                                    <label>Categoría:</label><br>
-                                                    <select name="categoría"  id="categoría" class="form-control categoria">
-                                                        <option value="matematica">Matemática</option>
-                                                        <option value="comunicacion">Comunicación</option>
+                                                    <label>Categorï¿½a:</label><br>
+                                                    <select name="categorï¿½a"  id="categorï¿½a" class="form-control categoria">
+                                                        <option value="matematica">Matemï¿½tica</option>
+                                                        <option value="comunicacion">Comunicaciï¿½n</option>
                                                         <option value="literatura">Literatura</option>
                                                     </select>
                                                 </div>    
@@ -386,8 +386,8 @@
                                                     <img src="icons/mas.png" width="28" alt="">
                                                 </button> <br><br> -->
                                                 <div class="form-group mb-2 subcat">
-                                                    <label>Subcategoría:</label><br>
-                                                    <select name="subcategoría"  class="form-control subcategoria" id="subcategoría">
+                                                    <label>Subcategorï¿½a:</label><br>
+                                                    <select name="subcategorï¿½a"  class="form-control subcategoria" id="subcategorï¿½a">
                                                         <option value="infantil">Infantil</option>
                                                         <option value="primaria">Primaria</option>
                                                         <option value="secundaria">Secundaria</option>
@@ -447,7 +447,7 @@
                         
                         <div class="anadir justify-content-between ">
                             <form action="ControladorGeneral" method="GET" name="formAddDetalleVenta" id="formAddDetalleVenta" accept-charset="UTF-8">
-                                <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-around" name="accion" value="AgregarDetalleVenta">Añadir a la venta
+                                <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-around" name="accion" value="AgregarDetalleVenta">Aï¿½adir a la venta
                                     <i class="fas fa-plus-circle align-self-center"></i>
                                 </button>
                             </form>
@@ -468,7 +468,7 @@
                             </thead>
 
                             <tbody>
-                                <%= tablaDetallesVenta %>
+                                <!-- <%= tablaDetallesVenta %> -->
                             </tbody>
                         </table>
                     </div>

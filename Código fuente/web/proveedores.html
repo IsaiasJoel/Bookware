@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<%@page import="modelo.Empresa"%>
+<!-- <%@page import="modelo.Empresa"%>
 <%@page import="modeloDAO.ProveedorDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Proveedor"%>
 <%@page import="modelo.Proveedor"%>
-<%@page session="true"%>
+<%@page session="true"%> -->
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -22,17 +22,17 @@
     </head>
 
     <body id="page-top">
-        <%
+        <!-- <%
             ProveedorDAO daoProveedor = new ProveedorDAO();
             
             HttpSession sesion = request.getSession();
             Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
             if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-        %>
+        %> -->
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
                 <div class="container-fluid d-flex flex-column p-0">
-                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.jsp">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
                         <div class="sidebar-brand-icon rotate-n-15">
                             <i class="fas fa-book-open"></i>
                         </div>
@@ -46,7 +46,7 @@
                     
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
                         
                         <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
@@ -56,7 +56,7 @@
                     <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
                         <!--INICIO-->
                         <li class="nav-item" role="presentation" id="btn_inicio">
-                            <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
+                            <a class="nav-link active" href="index.html" style="margin-bottom: 12px;">
                                 <i class="fas fa-home"></i>
                                 <span>Inicio</span>
                             </a>
@@ -71,15 +71,15 @@
 
                             <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                                 <!--clientes-->
-                                <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
+                                <a class="dropdown-item" href="clientes.html" id="btn_Cliente">
                                     <i class="far fa-user"></i> Clientes
                                 </a>
                                 <!--inventario-->
-                                <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
+                                <a class="dropdown-item" href="inventario.html" id="btn_inventario">
                                     <i class="fas fa-book-reader"></i> Inventario
                                 </a>
                                 <!--proveedores-->
-                                <a class="dropdown-item" href="proveedores.jsp">
+                                <a class="dropdown-item" href="proveedores.html">
                                     <i class="fas fa-luggage-cart"></i> Proveedores
                                 </a>
                             </div>
@@ -87,7 +87,7 @@
 
                         <!--COMPRAS -->
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
+                            <a class="nav-link" href="compras.html" style="margin-bottom: 12px;" id="btn_compra">
                                 <i class="fas fa-truck"></i>
                                 <span>Compras</span>
                             </a>
@@ -95,7 +95,7 @@
 
                         <!--VENTAS-->
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
+                            <a class="nav-link" href="ventas.html" style="margin-bottom: 12px;" id="btn_ventas">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>Ventas</span>
                             </a>
@@ -110,11 +110,11 @@
 
                             <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                                 <!--Reporte compras-->
-                                <a class="dropdown-item" href="reportesCompra.jsp">
+                                <a class="dropdown-item" href="reportesCompra.html">
                                     Reporte compras
                                 </a>
                                 <!--Resportes ventas-->
-                                <a class="dropdown-item" href="reportesVenta.jsp">
+                                <a class="dropdown-item" href="reportesVenta.html">
                                     Reporte ventas
                                 </a>
                             </div>
@@ -123,7 +123,7 @@
                         <!--CERRAR SESION-->
                         <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesiï¿½n</span>
                             </a>
                         </li>
                     </ul>
@@ -161,14 +161,14 @@
                                             <%
                                                 if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
                                             %>
-                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                            <a class="dropdown-item" role="presentation" href="administracion.html">
+                                                &nbsp;Configuraciï¿½n
                                             </a>
 
                                             <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesiï¿½n
                                             </a>
                                         </div>
                                     </div>
@@ -226,10 +226,10 @@
                             </thead>
 
                             <tbody>
-                                <%
+                                <!-- <%
                                     List<Proveedor> lstProveedores = daoProveedor.listar(empresaLogeo);
                                     for (Proveedor oProveedor : lstProveedores) {
-                                %>
+                                %> -->
                                 <tr>
                                     <th scope="row" class="text-dark"><%= oProveedor.getNombres()%></th>
 
@@ -286,7 +286,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro?</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">ï¿½Estï¿½s seguro?</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -306,7 +306,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <%}%>
+                                <!-- <%}%> -->
                             </tbody>
                         </table>
                     </div>
