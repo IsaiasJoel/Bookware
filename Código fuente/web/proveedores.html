@@ -49,8 +49,8 @@
                             <img src="" width="150" height="150">
                         </div>
                         
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
-                        <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
+                        <label for="" class="empresa"></label>
+                        <label for="" class="ruc"></label>
                     </div>
 
                     <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
@@ -123,7 +123,7 @@
                         <!--CERRAR SESION-->
                         <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesi�n</span>
+                                <span>Cerrar Sesi&oacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -158,17 +158,17 @@
                                             <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                         </a>
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
-                                            <%
+                                            <!-- <%
                                                 if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.html">
-                                                &nbsp;Configuraci�n
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
 
-                                            <%}%>
+                                            <%}%> -->
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi�n
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi&oacute;n
                                             </a>
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">�Est�s seguro?</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">¿Est&aacute;s seguro?</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
