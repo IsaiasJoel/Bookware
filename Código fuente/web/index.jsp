@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<%@page import="modelo.Empresa"%>
-<%@page session="true"%>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -14,13 +12,6 @@
 </head>
 
 <body id="page-top">
-    <%
-        HttpSession sesion = request.getSession();
-        Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-        if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-        String etiquetaImgLogo = "<img src=\""+empresaLogeo.getLogo()+"\" width=\"150\">";
-    %>
-    
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
@@ -38,11 +29,11 @@
                 
                 <div class="d-flex justify-content-center flex-column cont-logo">
                     <div class="d-flex align-items-center logo">
-                        <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"><%= empresaLogeo.getUsuario() %></label>
-                    <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
+                    <label for="" class="empresa"></label>
+                    <label for="" class="ruc"></label>
                 </div>
 
                 <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
@@ -115,7 +106,7 @@
                     <!--CERRAR SESION-->
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
-                            <span>Cerrar Sesión</span>
+                            <span>Cerrar SesiÃ³n</span>
                         </a>
                     </li>
                 </ul>
@@ -149,16 +140,14 @@
                                         <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
                                     </a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                        <%
-                                            if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
-                                        %>
+                                        
                                         <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                            &nbsp;Configuración
+                                            &nbsp;Configuraciï¿½n
                                         </a>
                                         
-                                        <%}%>
+                                        
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesiï¿½n
                                         </a>
                                     </div>
                                 </div>
