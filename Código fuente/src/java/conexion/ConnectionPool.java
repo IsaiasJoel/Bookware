@@ -6,13 +6,11 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class ConnectionPool {
     private final String nameBBDD = "Bookware";
-    private final String USER = "";
-    private final String PASS = "";
-    private final String port = "3306";
-    private final String host = "localhost";
-    private final String instanceName = "LAPTOP-M2HJP1QQ\\SQLEXPRESS";
-    //private final String URL = "jdbc:mysql://" + host + ":" + port + "/" + nameBBDD + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private final String URL = "jdbc:sqlserver://"+host+"\\"+instanceName+":"+port+";databaseName="+nameBBDD;
+    private final String USER = "sa";
+    private final String PASS = "root";
+    private final String port = "1433";
+    private final String serverName = "LAPTOP-M2HJP1QQ\\SQLEXPRESS";
+    private final String URL = "jdbc:sqlserver://"+serverName+":"+port+";databaseName="+nameBBDD;
     
     private static ConnectionPool dataSource;
     private BasicDataSource basicDataSource = null;
