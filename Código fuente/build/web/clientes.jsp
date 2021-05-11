@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<%@page import="modelo.Empresa"%>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
+<!-- <%@page import="modelo.Empresa"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Cliente"%>
 <%@page import="modeloDAO.ClienteDAO"%>
-<%@page session="true"%>
-<html lang="es">
+<%@page session="true"%> -->
+<jsp lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -21,12 +22,15 @@
 
 <body id="page-top">
     <%
-        HttpSession sesion = request.getSession();
-        Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+            HttpSession sesion = request.getSession();
+            Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
 
-        ClienteDAO daoCliente = new ClienteDAO();
-        if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-    %>
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
+        %>
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
@@ -44,11 +48,11 @@
                 
                 <div class="d-flex justify-content-center flex-column cont-logo">
                     <div class="d-flex align-items-center logo">
-                        <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"><%= empresaLogeo.getUsuario() %></label>
-                    <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
+                    <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
+                    <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                 </div>
 
                 <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
@@ -122,7 +126,7 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
-                            <span>Cerrar Sesión</span>
+                            <span>Cerrar Sesi&oacute;n</span>
                         </a>
                     </li>
                 </ul>
@@ -153,20 +157,20 @@
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                         <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
                                     </a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                        <!--validacion para que se muestre la pagina de administrador-->
                                         <%
-                                            if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                            if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                         %>
                                         <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                            &nbsp;Configuración
+                                            &nbsp;Configuraci&oacute;n
                                         </a>
-
                                         <%}%>
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi&oacute;n
                                         </a>
                                     </div>
                                 </div>
@@ -182,7 +186,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <!--pegar acá-->
+                                <!--pegar ac&aacute;-->
                                 <br>
                                 <h3 class="title-inventario text-center">Clientes</h3>
                                 <hr>
@@ -234,10 +238,10 @@
                                     </thead>
 
                                     <tbody>
-                                        <%
+                                        <!-- <%
                                             List<Cliente> lstClientes = daoCliente.listar(empresaLogeo);
                                             for (Cliente oCliente : lstClientes) {
-                                        %>
+                                        %> -->
                                         <tr>
                                             <th class="text-dark"> <%= oCliente.getDni()%></th>
                                             <th class="text-dark"> <%= oCliente.getNombres()%></th>
@@ -299,7 +303,7 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">¿Estás seguro?</h5>
+                                                                <h5 class="modal-title">Â¿Est&aacute;s seguro?</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -319,7 +323,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <%}%>
+                                        <!-- <%}%> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -338,4 +342,4 @@
     <script src="js/scripts.js" type="text/javascript"></script>
 </body>
 
-</html>
+</jsp>

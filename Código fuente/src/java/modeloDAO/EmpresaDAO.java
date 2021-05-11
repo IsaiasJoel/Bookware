@@ -9,41 +9,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import modelo.Empresa;
+import modelo.Perfil;
+import modelo.Usuario;
 
 public class EmpresaDAO implements CRUD.CRUD_Empresa{
     Empresa empresa = null;
+    Usuario usuario = null;
+    Perfil perfil = null;
+    
     Connection con;
     PreparedStatement ps;
     Statement st;
     ResultSet rs;
-
-    @Override
-    public Empresa verificarLogeo(String usuario, String password) {
-        final String sql = "select id_empresa,RUC, usuario,logo from empresa where usuario=? and password=?";
-
-        try {
-            con = ConnectionPool.getInstance().getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, usuario);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                empresa = new Empresa(rs.getInt("id_empresa"), rs.getString("RUC"),rs.getString("usuario"),rs.getString("logo"));
-                System.out.println(empresa.toString());
-            }
-        } catch (SQLException e) {
-            System.out.println("-> error en dao empresa verificar logeo: " + e.getMessage());
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return empresa;
-    }
 
     @Override
     public Empresa buscarPorRUC(String _RUC) {
@@ -53,7 +30,7 @@ public class EmpresaDAO implements CRUD.CRUD_Empresa{
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                empresa = new Empresa(rs.getInt(1),_RUC,rs.getString(3));
+                //empresa = new Empresa(rs.getInt(1),_RUC,rs.getString(3));
             }
         } catch (SQLException e) {
             System.out.println("-> error en dao empresa buscar por RUC" + e.getMessage());
@@ -78,7 +55,7 @@ public class EmpresaDAO implements CRUD.CRUD_Empresa{
             ps.setInt(1, _id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                empresa = new Empresa(rs.getInt(1), rs.getString(2), rs.getString(3));
+                //empresa = new Empresa(rs.getInt(1), rs.getString(2), rs.getString(3));
             }
         } catch (SQLException e) {
             System.out.println("error en dao empresa buscar por ID: " + e.getMessage());
@@ -102,8 +79,8 @@ public class EmpresaDAO implements CRUD.CRUD_Empresa{
             con = ConnectionPool.getInstance().getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, empresa.getRUC());
-            ps.setString(2, empresa.getUsuario());
-            ps.setString(3, empresa.getPassword());
+            //ps.setString(2, empresa.getUsuario());
+            //ps.setString(3, empresa.getPassword());
             ps.setString(4, empresa.getLogo());
             
             if (ps.executeUpdate() != 0) {
@@ -122,8 +99,8 @@ public class EmpresaDAO implements CRUD.CRUD_Empresa{
             con = ConnectionPool.getInstance().getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, empresa.getRUC());
-            ps.setString(2, empresa.getUsuario());
-            ps.setString(3, empresa.getPassword());
+            //ps.setString(2, empresa.getUsuario());
+            //ps.setString(3, empresa.getPassword());
             ps.setString(4, empresa.getLogo());
             ps.setInt(5, empresa.getId_empresa());
             if (ps.executeUpdate() != 0) {

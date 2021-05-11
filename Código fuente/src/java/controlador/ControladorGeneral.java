@@ -15,6 +15,7 @@ import logicaDeNegocio.DetalleCompraLogic;
 import logicaDeNegocio.DetalleVentaLogic;
 import logicaDeNegocio.LibroLogic;
 import logicaDeNegocio.ProveedorLogic;
+import logicaDeNegocio.UsuarioLogic;
 import logicaDeNegocio.VentaLogic;
 import modelo.Autor;
 import modelo.Categoria;
@@ -25,6 +26,7 @@ import modelo.DetalleVenta;
 import modelo.Editorial;
 import modelo.Empresa;
 import modelo.Libro;
+import modelo.Perfil;
 import modelo.Proveedor;
 import modelo.Subcategoria;
 import modelo.Venta;
@@ -39,6 +41,7 @@ public class ControladorGeneral extends HttpServlet {
     CategoriaDAO categoriaDAO = new CategoriaDAO();
     EditorialDAO editorialDAO = new EditorialDAO();
     SubcategoriaDAO subcategoriaDAO = new SubcategoriaDAO();
+    
     LibroLogic logicLibro = new LibroLogic();
     ProveedorLogic logicProveedor = new ProveedorLogic();
     ClienteLogic logicCliente = new ClienteLogic();
@@ -47,6 +50,7 @@ public class ControladorGeneral extends HttpServlet {
     DetalleCompraLogic logicDetalleCompra = new DetalleCompraLogic();
     DetalleVentaLogic logicDetalleVenta = new DetalleVentaLogic();
     VentaLogic logicVenta = new VentaLogic();
+    UsuarioLogic logicUsuario = new UsuarioLogic();
     
     ArrayList<DetalleCompra> lstProvisionalDetallesCompra;
     ArrayList<DetalleVenta> lstProvisionalDetallesVenta;
@@ -60,6 +64,7 @@ public class ControladorGeneral extends HttpServlet {
     Empresa oEmpresa;
     Compra oCompra;
     Venta oVenta;
+    Perfil oPerfil;
     
     String rutaInventario = "inventario.jsp";
     String rutaProveedor = "proveedores.jsp";
@@ -390,10 +395,12 @@ public class ControladorGeneral extends HttpServlet {
                         String usuarioEmpresa = request.getParameter("usuarioEmpresa");
                         String passwordEmpresa = request.getParameter("passwordEmpresa");
 
-                        oEmpresa = empresaDAO.verificarLogeo(usuarioEmpresa, passwordEmpresa);
-
+                        oPerfil = (Perfil) logicUsuario.verificarLogeo(usuarioEmpresa, passwordEmpresa)[0];
+                        oEmpresa = (Empresa)logicUsuario.verificarLogeo(usuarioEmpresa, passwordEmpresa)[1];
+                        
                         if (oEmpresa != null) {
                             sesionActual.setAttribute("empresa", oEmpresa);
+                            sesionActual.setAttribute("perfil", oPerfil);
                             System.out.println("Creó la sesión");
                             ruta = rutaIndex;
                         }

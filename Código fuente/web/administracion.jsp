@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+<%@page import="modelo.Perfil"%>
+<%@page import="modelo.Empresa"%>
+<!DOCTYPE jsp>
+<jsp lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,10 +17,20 @@
         <title>Administración de empresas - bookware</title>
     </head>
     <body id="page-top">
+        <%
+            HttpSession sesion = request.getSession();
+            Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
+        %>
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
                 <div class="container-fluid d-flex flex-column p-0">
-                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.jsp">
                         <div class="sidebar-brand-icon rotate-n-15">
                             <i class="fas fa-book-open"></i>
                         </div>
@@ -35,14 +47,14 @@
                             <img src="" width="150" height="150">
                         </div>
 
-                        <label for="" class="empresa"></label>
-                        <label for="" class="ruc"></label>
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial() %> </label>
+                        <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
                     </div>
 
                     <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
                         <!--INICIO-->
                         <li class="nav-item" role="presentation" id="btn_inicio">
-                            <a class="nav-link active" href="index.html" style="margin-bottom: 12px;">
+                            <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
                                 <i class="fas fa-home"></i>
                                 <span>Inicio</span>
                             </a>
@@ -57,15 +69,15 @@
 
                             <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                                 <!--clientes-->
-                                <a class="dropdown-item" href="clientes.html" id="btn_Cliente">
+                                <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
                                     <i class="far fa-user"></i> Clientes
                                 </a>
                                 <!--inventario-->
-                                <a class="dropdown-item" href="inventario.html" id="btn_inventario">
+                                <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
                                     <i class="fas fa-book-reader"></i> Inventario
                                 </a>
                                 <!--proveedores-->
-                                <a class="dropdown-item" href="proveedores.html">
+                                <a class="dropdown-item" href="proveedores.jsp">
                                     <i class="fas fa-luggage-cart"></i> Proveedores
                                 </a>
                             </div>
@@ -73,7 +85,7 @@
 
                         <!--COMPRAS -->
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="compras.html" style="margin-bottom: 12px;" id="btn_compra">
+                            <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
                                 <i class="fas fa-truck"></i>
                                 <span>Compras</span>
                             </a>
@@ -81,7 +93,7 @@
 
                         <!--VENTAS-->
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="ventas.html" style="margin-bottom: 12px;" id="btn_ventas">
+                            <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
                                 <i class="fas fa-shopping-cart"></i>
                                 <span>Ventas</span>
                             </a>
@@ -96,11 +108,11 @@
 
                             <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                                 <!--Reporte compras-->
-                                <a class="dropdown-item" href="reportesCompra.html">
+                                <a class="dropdown-item" href="reportesCompra.jsp">
                                     Reporte compras
                                 </a>
                                 <!--Resportes ventas-->
-                                <a class="dropdown-item" href="reportesVenta.html">
+                                <a class="dropdown-item" href="reportesVenta.jsp">
                                     Reporte ventas
                                 </a>
                             </div>
@@ -110,7 +122,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesi&aoacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -149,12 +161,14 @@
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
                                             
 
-                                            <!-- acá había una validación para que se muestre la página de administrador -->
-                                            <a class="dropdown-item" role="presentation" href="administracion.html">
-                                                &nbsp;Configuración
+                                            <!--validacion para que se muestre la pagina de administrador-->
+                                            <%
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
+                                            %>
+                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
-                                            
+                                            <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
@@ -173,7 +187,7 @@
                             <div class="col-12">
                                 <!--pegar acá-->
                                 <br>
-                                <h3 class="title-inventario text-center">Administración</h3>
+                                <h3 class="title-inventario text-center">Administraci&oacute;n</h3>
                                 <h5 class="">&nbsp; solo personal autorizado</h5>
                                 <hr>
 
@@ -236,7 +250,7 @@
                                     
                                     <tbody>
 
-                                        <!-- <%= controlador.imprimirTablaEmpresas()%> -->
+                                        <!-- <%= //controlador.imprimirTablaEmpresas()%> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -253,4 +267,4 @@
         <script src="js/principal.js" type="text/javascript"></script>
         <script src="js/scripts.js" type="text/javascript"></script>
     </body>
-</html>
+</jsp>

@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<%@page import="modelo.DetalleVenta"%>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
+<!-- <%@page import="modelo.DetalleVenta"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modeloDAO.LibroDAO"%>
 <%@page import="modeloDAO.ClienteDAO"%>
 <%@page import="modelo.Empresa"%>
-<%@page session="true"%>
-<html lang="es">
+<%@page session="true"%> -->
+<jsp lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -22,11 +23,12 @@
 </head>
 
 <body id="page-top">
-    <%
+    <!-- <%
         HttpSession sesionActual = request.getSession();
         Empresa empresaLogeo = (Empresa) sesionActual.getAttribute("empresa");
+        Perfil perfil = (Perfil) sesionActual.getAttribute("perfil");
         ArrayList<DetalleVenta> lstDetallesVenta = (ArrayList<DetalleVenta>) sesionActual.getAttribute("lstDetallesVenta");
-        String mensajeConfirmacionVenta = (String) sesionActual.getAttribute("mensajeConfirmaciónVenta");
+        String mensajeConfirmacionVenta = (String) sesionActual.getAttribute("mensajeConfirmaciÃ³nVenta");
         
         if (lstDetallesVenta == null) {
             lstDetallesVenta = new ArrayList<>();
@@ -43,7 +45,7 @@
             mensajeConfirmacionVenta = "";
         }
         if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-    %>
+    %> -->
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
@@ -60,10 +62,10 @@
                 <hr class="sidebar-divider my-0">
                 <div class="d-flex justify-content-center flex-column cont-logo">
                     <div class="d-flex align-items-center logo">
-                        <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                    <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
                     <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                 </div>
                 <hr class="sidebar-divider my-0">
@@ -138,7 +140,7 @@
                     <!--CERRAR SESION-->
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
-                            <span>Cerrar Sesión</span>
+                            <span>Cerrar Sesi&oacute;n</span>
                         </a>
                     </li>
                 </ul>
@@ -232,7 +234,7 @@
                                         <h6 class="dropdown-header">alerts center</h6>
                                         <a class="d-flex align-items-center dropdown-item" href="#">
                                             <div class="dropdown-list-image mr-3">
-                                                <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                                <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                                 <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                             </div>
                                             <div class="font-weight-bold">
@@ -264,7 +266,7 @@
                                             </div>
                                             <div class="font-weight-bold">
                                                 <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                                <p class="small text-gray-500 mb-0">Chicken the Dog 2w</p>
                                             </div>
                                         </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
                                 </div>
@@ -272,7 +274,12 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
+                                        <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
+                                    </a>
+                                    
                                     <div
                                         class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <a class="dropdown-item" role="presentation" href="#">
@@ -281,18 +288,18 @@
                                         
                                         <div class="dropdown-divider"></div>
                                         
+                                        <!--validacion para que se muestre la pagina de administrador-->
                                         <%
-                                            if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                            if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                         %>
                                         <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                            &nbsp;Configuración
+                                            &nbsp;Configuraci&oacute;n
                                         </a>
-
                                         <%}%>
                                         
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;
-                                            Cerrar sesión
+                                            Cerrar sesi&oacute;n
                                         </a>
                                     </div>
                                 </div>
@@ -302,18 +309,18 @@
                 </nav>
                 
                 <div class="container-fluid">
-                    <%
+                    <!-- <%
                         if(mensajeConfirmacionVenta.equalsIgnoreCase("ok")){
                             mensajeConfirmacionVenta = "";
                     %>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Hecho!</strong> La venta se ha realizado con éxito.
+                        <strong>Hecho!</strong> La venta se ha realizado con &eacute;xito.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     
-                    <%}%>
+                    <%}%> -->
                     
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0">Nueva Venta</h3>
@@ -375,10 +382,10 @@
                                             <!--Div para agrupar los select-->
                                             <div class="d-flex justify-content-between mt-4">
                                                 <div class="form-group categ">
-                                                    <label>Categoría:</label><br>
-                                                    <select name="categoría"  id="categoría" class="form-control categoria">
-                                                        <option value="matematica">Matemática</option>
-                                                        <option value="comunicacion">Comunicación</option>
+                                                    <label>Categor&iacute;a:</label><br>
+                                                    <select name="categorÃ­a"  id="categorÃ­a" class="form-control categoria">
+                                                        <option value="matematica">Matem&aacute;tica</option>
+                                                        <option value="comunicacion">Comunicaci&oacute;n</option>
                                                         <option value="literatura">Literatura</option>
                                                     </select>
                                                 </div>    
@@ -386,8 +393,8 @@
                                                     <img src="icons/mas.png" width="28" alt="">
                                                 </button> <br><br> -->
                                                 <div class="form-group mb-2 subcat">
-                                                    <label>Subcategoría:</label><br>
-                                                    <select name="subcategoría"  class="form-control subcategoria" id="subcategoría">
+                                                    <label>Subcategor&iacute;a:</label><br>
+                                                    <select name="subcategorÃ­a"  class="form-control subcategoria" id="subcategorÃ­a">
                                                         <option value="infantil">Infantil</option>
                                                         <option value="primaria">Primaria</option>
                                                         <option value="secundaria">Secundaria</option>
@@ -441,16 +448,16 @@
                     </div>
                     
                     <div class="d-flex flex-row-reverse cont-btn">
-                        <div class="cancelar justify-content-between ">
-                            <button type="button" class="btn btn-danger d-flex flex-nowrap justify-content-around">Cancelar_<i class="fas fa-times align-self-center"></i></button>
-                        </div>
-                        
                         <div class="anadir justify-content-between ">
                             <form action="ControladorGeneral" method="GET" name="formAddDetalleVenta" id="formAddDetalleVenta" accept-charset="UTF-8">
-                                <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-around" name="accion" value="AgregarDetalleVenta">Añadir a la venta
+                                <button type="submit" class="btn btn-success d-flex flex-nowrap justify-content-around" name="accion" value="AgregarDetalleVenta">A&ntilde;adir a la venta
                                     <i class="fas fa-plus-circle align-self-center"></i>
                                 </button>
                             </form>
+                        </div>
+                        
+                        <div class="cancelar justify-content-between ">
+                            <button type="button" class="btn btn-danger d-flex flex-nowrap justify-content-around">Cancelar_<i class="fas fa-times align-self-center"></i></button>
                         </div>
                     </div>
                     
@@ -468,7 +475,7 @@
                             </thead>
 
                             <tbody>
-                                <%= tablaDetallesVenta %>
+                                <!-- <%= tablaDetallesVenta %> -->
                             </tbody>
                         </table>
                     </div>
@@ -508,4 +515,4 @@
     <script src="js/compra.js" type="text/javascript"></script>
 </body>
 
-</html>
+</jsp>

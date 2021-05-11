@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<%@page import="modelo.Perfil"%>
+<%@page import="modelo.Perfil"%>
 <%@page import="modelo.Empresa"%>
-<%@page session="true"%>
-<html lang="es">
+<!DOCTYPE jsp>
+<jsp lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -17,10 +18,13 @@
     <%
         HttpSession sesion = request.getSession();
         Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-        if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-        String etiquetaImgLogo = "<img src=\""+empresaLogeo.getLogo()+"\" width=\"150\">";
+        Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+
+        //ClienteDAO daoCliente = new ClienteDAO();
+        if (empresaLogeo.getLogo() == null) {
+            empresaLogeo.setLogo("");
+        }
     %>
-    
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
@@ -38,10 +42,10 @@
                 
                 <div class="d-flex justify-content-center flex-column cont-logo">
                     <div class="d-flex align-items-center logo">
-                        <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                        <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"><%= empresaLogeo.getUsuario() %></label>
+                    <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial() %> </label>
                     <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
                 </div>
 
@@ -115,7 +119,7 @@
                     <!--CERRAR SESION-->
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
-                            <span>Cerrar Sesión</span>
+                            <span>Cerrar SesiÃ³n</span>
                         </a>
                     </li>
                 </ul>
@@ -141,24 +145,31 @@
                                 </div>
                             </li>
                             
-                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <!--<div class="d-none d-sm-block topbar-divider"></div>-->
                             
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
-                                        <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
-                                    </a>
-                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                        <%
-                                            if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
-                                        %>
-                                        <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                            &nbsp;Configuración
-                                        </a>
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small">
+                                            <%= empresaLogeo.getRazonSocial() %>
+                                        </span>
                                         
+                                        <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
+                                        
+                                    </a>
+                                    
+                                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                        <!--validacion para que se muestre la pagina de administrador-->
+                                        <%
+                                            if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
+                                        %>
+                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
+                                                &nbsp;Configuraci&oacute;n
+                                            </a>
                                         <%}%>
+                                        
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar SesiÃ³n
                                         </a>
                                     </div>
                                 </div>
@@ -229,7 +240,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-secondary shadow">
-                                        <a href="reporteCompra.jsp">
+                                        <a href="reportesCompra.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Reporte de compra</p>
                                                 <!--<p class="text-white-50 small m-0">#858796</p>-->
@@ -254,4 +265,4 @@
     <script src="js/scripts.js" type="text/javascript"></script>
 </body>
 
-</html>
+</jsp>

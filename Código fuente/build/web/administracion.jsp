@@ -1,10 +1,7 @@
-<%@page import="controlador.ControladorImagenes"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="modeloDAO.ClienteDAO"%>
+<%@page import="modelo.Perfil"%>
 <%@page import="modelo.Empresa"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE jsp>
+<jsp lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -23,9 +20,12 @@
         <%
             HttpSession sesion = request.getSession();
             Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-            
-            ControladorImagenes controlador = new ControladorImagenes();
-            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
         %>
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
@@ -44,11 +44,11 @@
 
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
 
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
-                        <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial() %> </label>
+                        <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
                     </div>
 
                     <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
@@ -122,7 +122,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesi&aoacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -156,16 +156,18 @@
                                 <li class="nav-item dropdown no-arrow" role="presentation">
                                     <div class="nav-item dropdown no-arrow">
                                         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario() %></span>
-                                            <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo() %>"></a>
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"></span>
+                                            <img class="border rounded-circle img-profile" src=""></a>
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            
+
+                                            <!--validacion para que se muestre la pagina de administrador-->
                                             <%
-                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
                                             <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
@@ -185,7 +187,7 @@
                             <div class="col-12">
                                 <!--pegar acá-->
                                 <br>
-                                <h3 class="title-inventario text-center">Administración</h3>
+                                <h3 class="title-inventario text-center">Administraci&oacute;n</h3>
                                 <h5 class="">&nbsp; solo personal autorizado</h5>
                                 <hr>
 
@@ -247,7 +249,8 @@
                                     </thead>
                                     
                                     <tbody>
-                                        <%= controlador.imprimirTablaEmpresas()%>
+
+                                        <!-- <%= //controlador.imprimirTablaEmpresas()%> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -264,4 +267,4 @@
         <script src="js/principal.js" type="text/javascript"></script>
         <script src="js/scripts.js" type="text/javascript"></script>
     </body>
-</html>
+</jsp>

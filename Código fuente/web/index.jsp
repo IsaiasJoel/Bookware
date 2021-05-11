@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
+<%@page import="modelo.Perfil"%>
+<%@page import="modelo.Perfil"%>
+<%@page import="modelo.Empresa"%>
+<!DOCTYPE jsp>
+<jsp lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -12,10 +15,20 @@
 </head>
 
 <body id="page-top">
+    <%
+        HttpSession sesion = request.getSession();
+        Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
+        Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+
+        //ClienteDAO daoCliente = new ClienteDAO();
+        if (empresaLogeo.getLogo() == null) {
+            empresaLogeo.setLogo("");
+        }
+    %>
     <div id="wrapper">
         <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.html">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="index.jsp">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-book-open"></i>
                     </div>
@@ -32,14 +45,14 @@
                         <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"></label>
-                    <label for="" class="ruc"></label>
+                    <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial() %> </label>
+                    <label for="" class="ruc"><%= empresaLogeo.getRUC() %></label>
                 </div>
 
                 <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
                       <!--INICIO-->
                     <li class="nav-item" role="presentation" id="btn_inicio">
-                        <a class="nav-link active" href="index.html" style="margin-bottom: 12px;">
+                        <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -54,15 +67,15 @@
                         
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--clientes-->
-                            <a class="dropdown-item" href="clientes.html" id="btn_Cliente">
+                            <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
                                 <i class="far fa-user"></i> Clientes
                             </a>
                             <!--inventario-->
-                            <a class="dropdown-item" href="inventario.html" id="btn_inventario">
+                            <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
                                 <i class="fas fa-book-reader"></i> Inventario
                             </a>
                             <!--proveedores-->
-                            <a class="dropdown-item" href="proveedores.html">
+                            <a class="dropdown-item" href="proveedores.jsp">
                                <i class="fas fa-luggage-cart"></i> Proveedores
                             </a>
                         </div>
@@ -70,7 +83,7 @@
 
                     <!--COMPRAS -->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="compras.html" style="margin-bottom: 12px;" id="btn_compra">
+                        <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
                             <i class="fas fa-truck"></i>
                             <span>Compras</span>
                         </a>
@@ -78,7 +91,7 @@
 
                     <!--VENTAS-->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="ventas.html" style="margin-bottom: 12px;" id="btn_ventas">
+                        <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Ventas</span>
                         </a>
@@ -93,18 +106,18 @@
                         
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--Reporte compras-->
-                            <a class="dropdown-item" href="reportesCompra.html">
+                            <a class="dropdown-item" href="reportesCompra.jsp">
                                 Reporte compras
                             </a>
                             <!--Resportes ventas-->
-                            <a class="dropdown-item" href="reportesVenta.html">
+                            <a class="dropdown-item" href="reportesVenta.jsp">
                                 Reporte ventas
                             </a>
                         </div>
                     </li>
                     
                     <!--CERRAR SESION-->
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html" style="margin-bottom:12px;">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp" style="margin-bottom:12px;">
                             <i class="fas fa-reply"></i>
                             <span>Cerrar Sesión</span>
                         </a>
@@ -132,22 +145,31 @@
                                 </div>
                             </li>
                             
-                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <!--<div class="d-none d-sm-block topbar-divider"></div>-->
                             
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
-                                        <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
+                                <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small">
+                                            <%= empresaLogeo.getRazonSocial() %>
+                                        </span>
+                                        
+                                        <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
+                                        
                                     </a>
+                                    
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                                        
-                                        <a class="dropdown-item" role="presentation" href="administracion.html">
-                                            &nbsp;Configuraci&oacute;n
-                                        </a>
-                                        
+                                        <!--validacion para que se muestre la pagina de administrador-->
+                                        <%
+                                            if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
+                                        %>
+                                            <a class="dropdown-item" role="presentation" href="administracion.jsp">
+                                                &nbsp;Configuraci&oacute;n
+                                            </a>
+                                        <%}%>
                                         
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi�n
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
                                         </a>
                                     </div>
                                 </div>
@@ -168,7 +190,7 @@
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-primary shadow">
-                                        <a href="ventas.html">
+                                        <a href="ventas.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Vender</p>
                                                 <!--<p class="text-white-50 small m-0">#4e73df</p>-->
@@ -178,7 +200,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-success shadow">
-                                        <a href="compras.html">
+                                        <a href="compras.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Comprar</p>
                                                 <!--<p class="text-white-50 small m-0">#1cc88a</p>-->
@@ -188,7 +210,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-info shadow">
-                                        <a href="inventario.html">
+                                        <a href="inventario.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Inventario</p>
                                                 <!--<p class="text-white-50 small m-0">#36b9cc</p>-->
@@ -198,7 +220,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-warning shadow">
-                                        <a href="clientes.html">
+                                        <a href="clientes.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Clientes</p>
                                                 <!--<p class="text-white-50 small m-0">#f6c23e</p>-->
@@ -208,7 +230,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-danger shadow">
-                                        <a href="proveedores.html">
+                                        <a href="proveedores.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Proveedores</p>
                                                 <!--<p class="text-white-50 small m-0">#e74a3b</p>-->
@@ -218,7 +240,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-4">
                                     <div class="card text-white bg-secondary shadow">
-                                        <a href="reportesCompra.html">
+                                        <a href="reportesCompra.jsp">
                                             <div class="card-body">
                                                 <p class="m-0 text-white-50">Reporte de compra</p>
                                                 <!--<p class="text-white-50 small m-0">#858796</p>-->
@@ -243,4 +265,4 @@
     <script src="js/scripts.js" type="text/javascript"></script>
 </body>
 
-</html>
+</jsp>

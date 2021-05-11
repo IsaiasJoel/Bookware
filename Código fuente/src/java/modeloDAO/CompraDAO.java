@@ -56,7 +56,7 @@ public class CompraDAO implements CRUD.CRUD_Compra{
             st = con.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                compra = new Compra(rs.getInt(1),rs.getDouble(2),rs.getDate(3),daoEmpresa.buscarPorID(rs.getInt(4)), daoProveedor.buscarPorId(rs.getInt(5)),rs.getString(6));
+                //compra = new Compra(rs.getInt(1),rs.getDouble(2),rs.getDate(3),daoEmpresa.buscarPorID(rs.getInt(4)), daoProveedor.buscarPorId(rs.getInt(5)),rs.getString(6));
                 list.add(compra);
             }
         } catch (SQLException e) {

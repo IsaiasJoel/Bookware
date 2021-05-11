@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
 <!-- <%@page import="modelo.DetalleVenta"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,7 +7,7 @@
 <%@page import="modeloDAO.ClienteDAO"%>
 <%@page import="modelo.Empresa"%>
 <%@page session="true"%> -->
-<html lang="es">
+<jsp lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -25,6 +26,7 @@
     <!-- <%
         HttpSession sesionActual = request.getSession();
         Empresa empresaLogeo = (Empresa) sesionActual.getAttribute("empresa");
+        Perfil perfil = (Perfil) sesionActual.getAttribute("perfil");
         ArrayList<DetalleVenta> lstDetallesVenta = (ArrayList<DetalleVenta>) sesionActual.getAttribute("lstDetallesVenta");
         String mensajeConfirmacionVenta = (String) sesionActual.getAttribute("mensajeConfirmaciónVenta");
         
@@ -63,15 +65,15 @@
                         <img src="" width="150" height="150">
                     </div>
                     
-                    <label for="" class="empresa"></label>
-                    <label for="" class="ruc"></label>
+                    <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
+                    <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                 </div>
                 <hr class="sidebar-divider my-0">
                 
                 <ul class="nav navbar-nav text-light" id="accordionSidebar" style="margin-top: 30px;">
                     <!--INICIO-->
                     <li class="nav-item" role="presentation" id="btn_inicio">
-                        <a class="nav-link active" href="index.html" style="margin-bottom: 12px;">
+                        <a class="nav-link active" href="index.jsp" style="margin-bottom: 12px;">
                             <i class="fas fa-home"></i>
                             <span>Inicio</span>
                         </a>
@@ -86,15 +88,15 @@
 
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--clientes-->
-                            <a class="dropdown-item" href="clientes.html" id="btn_Cliente">
+                            <a class="dropdown-item" href="clientes.jsp" id="btn_Cliente">
                                 <i class="far fa-user"></i> Clientes
                             </a>
                             <!--inventario-->
-                            <a class="dropdown-item" href="inventario.html" id="btn_inventario">
+                            <a class="dropdown-item" href="inventario.jsp" id="btn_inventario">
                                 <i class="fas fa-book-reader"></i> Inventario
                             </a>
                             <!--proveedores-->
-                            <a class="dropdown-item" href="proveedores.html">
+                            <a class="dropdown-item" href="proveedores.jsp">
                                 <i class="fas fa-luggage-cart"></i> Proveedores
                             </a>
                         </div>
@@ -102,7 +104,7 @@
 
                     <!--COMPRAS -->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="compras.html" style="margin-bottom: 12px;" id="btn_compra">
+                        <a class="nav-link" href="compras.jsp" style="margin-bottom: 12px;" id="btn_compra">
                             <i class="fas fa-truck"></i>
                             <span>Compras</span>
                         </a>
@@ -110,7 +112,7 @@
 
                     <!--VENTAS-->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="ventas.html" style="margin-bottom: 12px;" id="btn_ventas">
+                        <a class="nav-link" href="ventas.jsp" style="margin-bottom: 12px;" id="btn_ventas">
                             <i class="fas fa-shopping-cart"></i>
                             <span>Ventas</span>
                         </a>
@@ -125,11 +127,11 @@
 
                         <div class="dropdown-menu dropdown-menu-right xs-2 sm-2" aria-labelledby="dropdownMenuLink">
                             <!--Reporte compras-->
-                            <a class="dropdown-item" href="reportesCompra.html">
+                            <a class="dropdown-item" href="reportesCompra.jsp">
                                 Reporte compras
                             </a>
                             <!--Resportes ventas-->
-                            <a class="dropdown-item" href="reportesVenta.html">
+                            <a class="dropdown-item" href="reportesVenta.jsp">
                                 Reporte ventas
                             </a>
                         </div>
@@ -232,7 +234,7 @@
                                         <h6 class="dropdown-header">alerts center</h6>
                                         <a class="d-flex align-items-center dropdown-item" href="#">
                                             <div class="dropdown-list-image mr-3">
-                                                <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                                <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                                 <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                             </div>
                                             <div class="font-weight-bold">
@@ -274,7 +276,7 @@
                             <li class="nav-item dropdown no-arrow" role="presentation">
                                 <div class="nav-item dropdown no-arrow">
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                        <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                         <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
                                     </a>
                                     
@@ -286,14 +288,14 @@
                                         
                                         <div class="dropdown-divider"></div>
                                         
-                                        <!-- <%
-                                            if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                        <!--validacion para que se muestre la pagina de administrador-->
+                                        <%
+                                            if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                         %>
-                                        <a class="dropdown-item" role="presentation" href="administracion.html">
+                                        <a class="dropdown-item" role="presentation" href="administracion.jsp">
                                             &nbsp;Configuraci&oacute;n
                                         </a>
-
-                                        <%}%> -->
+                                        <%}%>
                                         
                                         <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;
@@ -513,4 +515,4 @@
     <script src="js/compra.js" type="text/javascript"></script>
 </body>
 
-</html>
+</jsp>

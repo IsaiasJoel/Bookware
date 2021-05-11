@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
+<!-- <%@page import="java.util.ArrayList"%>
 <%@page import="modeloDAO.EditorialDAO"%>
 <%@page import="modeloDAO.SubcategoriaDAO"%>
 <%@page import="modeloDAO.CategoriaDAO"%>
@@ -13,8 +14,8 @@
 <%@page import="modeloDAO.ProveedorDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page session="true"%>
-<html lang="es">
+<%@page session="true"%> -->
+<jsp lang="es">
     <head>
         <title>BookWare</title>
         <meta charset="utf-8">
@@ -31,11 +32,12 @@
     </head>
 
     <body id="page-top">
-        <%
+        <!-- <%
             HttpSession sesionActual = request.getSession();
             Empresa empresaLogeo = (Empresa) sesionActual.getAttribute("empresa");
+            Perfil perfil = (Perfil) sesionActual.getAttribute("perfil");
             ArrayList<DetalleCompra> lstDetallesCompra = (ArrayList<DetalleCompra>) sesionActual.getAttribute("lstDetallesCompra");
-            String mensajeConfirmacion = (String) sesionActual.getAttribute("mensajeConfirmación");
+            String mensajeConfirmacion = (String) sesionActual.getAttribute("mensajeConfirmaci&oacute;n");
             
             if (lstDetallesCompra == null) {
                 lstDetallesCompra = new ArrayList<>();
@@ -52,7 +54,7 @@
                 mensajeConfirmacion = "";
             }
             if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
-        %>
+        %> -->
         
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
@@ -64,9 +66,10 @@
                     <hr class="sidebar-divider my-0">
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
                         <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                     </div>
                     <hr class="sidebar-divider my-0">
@@ -142,7 +145,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link"href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesi&oacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -214,7 +217,7 @@
                                             <h6 class="dropdown-header">alerts center</h6>
                                             <a class="d-flex align-items-center dropdown-item" href="#">
                                                 <div class="dropdown-list-image mr-3">
-                                                    <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                                    <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                                     <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                                 </div>
                                             </a>
@@ -242,7 +245,7 @@
                                                 </div>
                                                 <div class="font-weight-bold">
                                                     <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                    <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                                    <p class="small text-gray-500 mb-0">Chicken the Dog 2w</p>
                                                 </div>
                                             </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
                                     </div>
@@ -252,39 +255,45 @@
                                 <div class="d-none d-sm-block topbar-divider"></div>
                                 
                                 <li class="nav-item dropdown no-arrow" role="presentation">
-                                    <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
+                                            <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>"></a>
+                                        </a>
+                                        
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
+                                            <!--validacion para que se muestre la pagina de administrador-->
                                             <%
-                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
                                             <%}%>
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout
                                             </a>
                                         </div>
-                                        </div>
-                                    </li>
+                                        
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </nav>
                     
                 <div class="container-fluid">
-                    <%
+                    <!-- <%
                         if(mensajeConfirmacion.equalsIgnoreCase("ok")){
                             mensajeConfirmacion = "";
                     %>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Hecho!</strong> La compra se ha realizado con éxito.
+                        <strong>Hecho!</strong> La compra se ha realizado con &eacute;xito.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     
-                    <%}%>
+                    <%}%> -->
                     
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
                         <h3 class="text-dark mb-0">Nueva Compra</h3>
@@ -336,10 +345,10 @@
                                             <!--Div para agrupar los select-->
                                             <div class="d-flex justify-content-between mt-4">
                                                 <div class="form-group categ">
-                                                    <label>Categoría:</label><br>
-                                                    <select name="categoría"  id="categoría" class="form-control categoria">
-                                                        <option value="matematica">Matemática</option>
-                                                        <option value="comunicacion">Comunicación</option>
+                                                    <label>Categor&iacute;a:</label><br>
+                                                    <select name="categorÃ­a"  id="categorÃ­a" class="form-control categoria">
+                                                        <option value="matematica">Matem&aacute;tica</option>
+                                                        <option value="comunicacion">Comunicaci&oacute;n</option>
                                                         <option value="literatura">Literatura</option>
                                                     </select>
                                                 </div>    
@@ -347,8 +356,8 @@
                                                     <img src="icons/mas.png" width="28" alt="">
                                                 </button> <br><br> -->
                                                 <div class="form-group mb-2 subcat">
-                                                    <label>Subcategoría:</label><br>
-                                                    <select name="subcategoría"  class="form-control subcategoria" id="subcategoría">
+                                                    <label>Subcategor&iacute;a:</label><br>
+                                                    <select name="subcategorÃ­a"  class="form-control subcategoria" id="subcategorÃ­a">
                                                         <option value="infantil">Infantil</option>
                                                         <option value="primaria">Primaria</option>
                                                         <option value="secundaria">Secundaria</option>
@@ -405,7 +414,7 @@
                     <form action="ControladorGeneral" method="GET" accept-charset=utf-8 name="formAddCarritoCompra" id="formAddCarritoCompra">
                         <div class="anadir">
                             <button type="submit" class="btn btn-success btn-block d-flex flex-nowrap justify-content-around" name="accion" value="AgregarLibroExisteCompra">
-                                Añadir a la compra
+                                A&ntilde;adir a la compra
                                 <i class="fas fa-plus-circle align-self-center"></i>
                             </button>
                         </div>
@@ -427,7 +436,7 @@
                             </thead>
                             
                             <tbody>
-                                <%= tablaDetallesCompra %>
+                                <!-- <%= tablaDetallesCompra %> -->
                             </tbody>
                         </table>
                     </div>
@@ -452,4 +461,4 @@
         <script src="assets/js/jquery-ui.js" type="text/javascript"></script>
         <script src="js/compra.js" type="text/javascript"></script>
     </body>
-</html>
+</jsp>

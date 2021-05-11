@@ -65,8 +65,11 @@ public interface CRUD {
         public boolean eliminar(int id);
     }
     
+    public interface CRUD_Usuario{
+        public Object[] verificarLogeo(String usuario, String password);
+    }
+    
     public interface CRUD_Empresa{
-        public Empresa verificarLogeo(String usuario,String password);
         public Empresa buscarPorRUC(String _RUC);
         public Empresa buscarPorID(int _id);
     }

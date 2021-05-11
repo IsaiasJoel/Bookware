@@ -7,10 +7,6 @@ import modeloDAO.EmpresaDAO;
 public class EmpresaLogic {
     EmpresaDAO daoEmpresa = new EmpresaDAO();
     
-    public Empresa verificarLogeo(String usuario, String password) {
-        return daoEmpresa.verificarLogeo(usuario, password);
-    }
-    
     public Empresa buscarPorRUC(String _RUC) {
         return daoEmpresa.buscarPorRUC(_RUC);
     }

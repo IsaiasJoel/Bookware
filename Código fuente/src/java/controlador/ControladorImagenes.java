@@ -47,11 +47,11 @@ public class ControladorImagenes extends HttpServlet {
             
         }
         
-        if(logicEmpresa.agregar(new Empresa(campos.get(0), campos.get(1), campos.get(2), imgs.get(0)))){
+        /*if(logicEmpresa.agregar(new Empresa(campos.get(0), campos.get(1), campos.get(2), imgs.get(0)))){
             response.getWriter().println("Producto Creado Exitosamente");
         }else{
             response.getWriter().println("ERROR al crear producto");
-        }
+        }*/
         request.getRequestDispatcher("administracion.jsp").forward(request, response);
     }
 
@@ -102,7 +102,7 @@ public class ControladorImagenes extends HttpServlet {
             html += ""
                     + "<tr>"
                     + "     <td>"+oempresa.getRUC()+"</td>"
-                    + "     <td>"+oempresa.getUsuario()+"</td>"
+                    //+ "     <td>"+oempresa.getUsuario()+"</td>"
                     + "     <td><img src=\""+oempresa.getLogo()+"\" width=\"80\"></td>"
                     + "     <td class=\"text-dark\">"
                     + "         <button type=\"button\" class=\"btn\" data-toggle=\"modal\" data-target=\"\" onclick=\"\">\n"

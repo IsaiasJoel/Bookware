@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<%@page import="modelo.Empresa"%>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
+<!-- <%@page import="modelo.Empresa"%>
 <%@page import="modeloDAO.ProveedorDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Proveedor"%>
 <%@page import="modelo.Proveedor"%>
-<%@page session="true"%>
-<html lang="es">
+<%@page session="true"%> -->
+<jsp lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -23,11 +24,16 @@
 
     <body id="page-top">
         <%
-            ProveedorDAO daoProveedor = new ProveedorDAO();
-            
             HttpSession sesion = request.getSession();
             Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+            
+            ProveedorDAO daoProveedor = new ProveedorDAO();
+
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
         %>
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
@@ -46,10 +52,10 @@
                     
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
                         
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
                         <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                     </div>
 
@@ -123,7 +129,7 @@
                         <!--CERRAR SESION-->
                         <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesi&oacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -154,21 +160,21 @@
                                 <li class="nav-item dropdown no-arrow" role="presentation">
                                     <div class="nav-item dropdown no-arrow">
                                         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                             <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                         </a>
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            <!--validacion para que se muestre la pagina de administrador-->
                                             <%
-                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
                                             <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi&oacute;n
                                             </a>
                                         </div>
                                     </div>
@@ -226,10 +232,10 @@
                             </thead>
 
                             <tbody>
-                                <%
+                                <!-- <%
                                     List<Proveedor> lstProveedores = daoProveedor.listar(empresaLogeo);
                                     for (Proveedor oProveedor : lstProveedores) {
-                                %>
+                                %> -->
                                 <tr>
                                     <th scope="row" class="text-dark"><%= oProveedor.getNombres()%></th>
 
@@ -286,7 +292,7 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro?</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Â¿Est&aacute;s seguro?</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -306,7 +312,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <%}%>
+                                <!-- <%}%> -->
                             </tbody>
                         </table>
                     </div>
@@ -322,4 +328,4 @@
         <script src="js/scripts.js" type="text/javascript"></script>
     </body>
 
-</html>
+</jsp>

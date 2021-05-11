@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@page import="modelo.Perfil"%>
+<!DOCTYPE jsp>
 <%@page import="logicaDeNegocio.LibroLogic"%>
 <%@page import="modelo.Empresa"%>
 <%@page import="java.util.ArrayList"%>
@@ -16,8 +17,8 @@
 <%@page import="java.util.List"%>
 <%@page import="modeloDAO.CategoriaDAO"%>
 <%@page session="true"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html lang="es">
+<%@page contentType="text/jsp" pageEncoding="UTF-8"%>
+<jsp lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -35,15 +36,21 @@
 
     <body id="page-top">
         <%
-            CategoriaDAO daoCategoria = new CategoriaDAO();
-            SubcategoriaDAO daoSubcategoria = new SubcategoriaDAO();
-            LibroLogic logicLibro = new LibroLogic();
-            AutorDAO daoAutor = new AutorDAO();
-            EditorialDAO daoEditorial = new EditorialDAO();
-            
             HttpSession sesion = request.getSession();
             Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+            
+            LibroLogic logicLibro = new LibroLogic();
+            
+            AutorDAO daoAutor = new AutorDAO();
+            EditorialDAO daoEditorial = new EditorialDAO();
+            CategoriaDAO daoCategoria = new CategoriaDAO();
+            SubcategoriaDAO daoSubcategoria = new SubcategoriaDAO();
+
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
         %>
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
@@ -62,10 +69,10 @@
                     
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
                         
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
                         <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                     </div>
 
@@ -170,17 +177,17 @@
                                 <li class="nav-item dropdown no-arrow" role="presentation">
                                     <div class="nav-item dropdown no-arrow">
                                         <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                             <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                         </a>
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            <!--validacion para que se muestre la pagina de administrador-->
                                             <%
-                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
                                             <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
@@ -261,7 +268,7 @@
                                                                     <label class="title-inventario" for="autorLibro">Autor:</label>
                                                                     <div class="d-flex">
                                                                         <select class="form-control" name="autorLibro"  id="autorLibro">
-                                                                            <%= daoAutor.getViewComboBoxAutor()%>
+                                                                            <!-- <%= daoAutor.getViewComboBoxAutor()%> -->
                                                                         </select>
 
                                                                         <button class="btn">
@@ -278,7 +285,7 @@
                                                                     <label class="title-inventario" for="editorialLibro">Editorial:</label>
                                                                     <div class="d-flex">
                                                                         <select class="form-control" name="editorialLibro"  id="editorialLibro">
-                                                                            <%= daoEditorial.getViewComboBoxEditorial()%>
+                                                                            <!-- <%= daoEditorial.getViewComboBoxEditorial()%> -->
                                                                         </select>
 
                                                                         <button class="btn">
@@ -295,7 +302,7 @@
                                                                     <label for="categoriaLibro" class="title-inventario">Categoría:</label><br>
                                                                     <div class="d-flex">
                                                                         <select class="form-control" name="categoriaLibro"  id="categoriaLibro">
-                                                                            <%= daoCategoria.getViewComboBoxCategoria()%>
+                                                                            <!-- <%= daoCategoria.getViewComboBoxCategoria()%> -->
                                                                         </select>
 
                                                                         <button class="btn">
@@ -346,10 +353,10 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <%
+                                                    <!-- <%
                                                         List<Libro> lstlibros = logicLibro.listar(empresaLogeo);
                                                         for (Libro oLibro : lstlibros) {
-                                                    %>
+                                                    %> -->
 
                                                     <tr>
                                                         <td><%= oLibro.getTitulo()%></td>
@@ -468,7 +475,7 @@
                                                             </div> 
                                                         </td>
                                                     </tr>
-                                                    <%}%>
+                                                    <!-- <%}%> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -531,13 +538,13 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        <%
+                                                        <!-- <%
                                                             List<Autor> lstAutores = daoAutor.listar();
                                                             //for (Autor oAutor : lstAutores) {
                                                             for (Autor oAutor : lstAutores) {
-                                                        %>
+                                                        %> -->
 
-                                                        <%--<%= daoAutor.getViewAutor()%>--%>
+                                                        <!-- <%--<%= daoAutor.getViewAutor()%>--%> -->
                                                         <tr id="tabla_vertical">
                                                             <td><%= oAutor.getNombres() + " " + oAutor.getApellidos()%></td>
                                                             <td><%= oAutor.getNacionalidad()%></td>
@@ -631,7 +638,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <%}%>
+                                                        <!-- <%}%> -->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -686,10 +693,10 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        <%
+                                                        <!-- <%
                                                             List<Categoria> lstCategoria = daoCategoria.listar();
                                                             for (Categoria oCategoria : lstCategoria) {
-                                                        %>
+                                                        %> -->
                                                         <tr>
                                                             <td><%= oCategoria.getNombreCategoria()%></td>
 
@@ -762,7 +769,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <%}%>
+                                                        <!-- <%}%> -->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -816,10 +823,10 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <%
+                                                    <!-- <%
                                                         List<Editorial> lstEditorial = daoEditorial.listar();
                                                         for (Editorial oEditorial : lstEditorial) {
-                                                    %>
+                                                    %> -->
                                                     <tr>
                                                         <td><%= oEditorial.getNombre()%></td>
 
@@ -896,7 +903,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <%}%>
+                                                    <!-- <%}%> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -932,7 +939,7 @@
                                                                 <div class="form-group">
                                                                     <label class="title-inventario" for="nombreCategoria">Categoría: </label>
                                                                     <select class="form-control" name="nombreCategoria" id="nombreCategoria">
-                                                                        <%= daoCategoria.getViewComboBoxCategoria()%>
+                                                                        <!-- <%= daoCategoria.getViewComboBoxCategoria()%> -->
                                                                     </select>
                                                                 </div>
 
@@ -958,11 +965,11 @@
                                                     </thead>
 
                                                     <tbody>
-                                                        <%--<%= daoSubcategoria.getViewRowSubcategoria()%>--%>
-                                                        <%
+                                                        <!-- <%--<%= daoSubcategoria.getViewRowSubcategoria()%>--%> -->
+                                                        <!-- <%
                                                             List<Subcategoria> lstSubcategoria = daoSubcategoria.listar();
                                                             for (Subcategoria oSubcategoria : lstSubcategoria) {
-                                                        %>
+                                                        %> -->
                                                         <tr>
                                                             <td><%= oSubcategoria.getNombre()%></td>
                                                             <td><%= oSubcategoria.getCategoria().getNombreCategoria()%></td>
@@ -1044,7 +1051,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <%}%>
+                                                        <!-- <%}%> -->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -1066,4 +1073,4 @@
         <script src="js/scripts.js" type="text/javascript"></script>
     </body>
 
-</html>
+</jsp>

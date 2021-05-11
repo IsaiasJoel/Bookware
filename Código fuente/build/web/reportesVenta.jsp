@@ -1,8 +1,9 @@
-<%@page import="controlador.ControladorGeneral"%>
-<!DOCTYPE html>
-<%@page import="modelo.Empresa"%>
-<%@page session="true"%>
-<html lang="es">
+<%@page import="modelo.Perfil"%>
+<!-- <%@page import="controlador.ControladorGeneral"%> -->
+<!DOCTYPE jsp>
+<!-- <%@page import="modelo.Empresa"%>
+<%@page session="true"%> -->
+<jsp lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -22,8 +23,14 @@
         <%
             HttpSession sesion = request.getSession();
             Empresa empresaLogeo = (Empresa) sesion.getAttribute("empresa");
-            ControladorGeneral controlador = new ControladorGeneral();
-            if (empresaLogeo.getLogo() == null) {empresaLogeo.setLogo("");}
+            Perfil perfil = (Perfil) sesion.getAttribute("perfil");
+            
+            ControladorGeneral controladorGeneral = new ControladorGeneral();
+
+            //ClienteDAO daoCliente = new ClienteDAO();
+            if (empresaLogeo.getLogo() == null) {
+                empresaLogeo.setLogo("");
+            }
         %>
         <div id="wrapper">
             <nav class="navbar sidebar-dark align-items-start sidebar  accordion p-0 nav_vertical">
@@ -42,10 +49,10 @@
                     
                     <div class="d-flex justify-content-center flex-column cont-logo">
                         <div class="d-flex align-items-center logo">
-                            <img src="<%= empresaLogeo.getLogo() %>" width="150" height="150">
+                            <img src="" width="150" height="150">
                         </div>
                         
-                        <label for="" class="empresa"><%= empresaLogeo.getUsuario()%></label>
+                        <label for="" class="empresa"> <%= empresaLogeo.getRazonSocial()%> </label>
                         <label for="" class="ruc"><%= empresaLogeo.getRUC()%></label>
                     </div>
 
@@ -119,7 +126,7 @@
                         <!--CERRAR SESION-->
                         <li class="nav-item" role="presentation"><a class="nav-link" href="ControladorGeneral?accion=CerrarSesion" style="margin-bottom:12px;">
                                 <i class="fas fa-reply"></i>
-                                <span>Cerrar Sesión</span>
+                                <span>Cerrar Sesi&oacute;n</span>
                             </a>
                         </li>
                     </ul>
@@ -149,21 +156,21 @@
                                 
                                 <li class="nav-item dropdown no-arrow" role="presentation">
                                     <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getUsuario()%></span>
+                                            <span class="d-none d-lg-inline mr-2 text-gray-600 small"><%= empresaLogeo.getRazonSocial()%></span>
                                             <img class="border rounded-circle img-profile" src="<%= empresaLogeo.getLogo()%>">
                                         </a>
                                         <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">                                       
+                                            <!--validacion para que se muestre la pagina de administrador-->
                                             <%
-                                                if (empresaLogeo.getUsuario().equalsIgnoreCase("root")) {
+                                                if (perfil.getNombre().equalsIgnoreCase("ADMINISTRADOR SISTEMA")) {
                                             %>
                                             <a class="dropdown-item" role="presentation" href="administracion.jsp">
-                                                &nbsp;Configuración
+                                                &nbsp;Configuraci&oacute;n
                                             </a>
-
                                             <%}%>
                                             
                                             <a class="dropdown-item" role="presentation" href="ControladorGeneral?accion=CerrarSesion">
-                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesión
+                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesi&oacute;n
                                             </a>
                                         </div>
                                     </div>
@@ -224,23 +231,23 @@
                                         </thead>
                                         
                                         <tbody>
-                                            <%= controlador.imprimirDetalleVenta(empresaLogeo) %>
+                                            <!-- <%= controladorGeneral.imprimirDetalleVenta(empresaLogeo) %> -->
                                         </tbody>
                                     </table>
                                 </div>
                                 
                                 <div class="row">
                                     <div class="col-md-6 align-self-center">
-                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Página 1 de 27</p>
+                                        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">P&aacute;gina 1 de 27</p>
                                     </div>
                                     <div class="col-md-6">
                                         <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
                                             <ul class="pagination">
-                                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                                <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">â—„</span></a></li>
                                                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">â–º</span></a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -260,4 +267,4 @@
         <script src="js/reportes.js" type="text/javascript"></script>
     </body>
 
-</html>
+</jsp>
